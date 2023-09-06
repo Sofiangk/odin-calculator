@@ -41,3 +41,6 @@ function operate(op, n1, n2) {
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
+let displayResult = 0;
+
+displayResult = document.querySelector(".result");
