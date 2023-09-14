@@ -1,125 +1,18 @@
-html {
-  font-size: 62.5%;
-  box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
-}
-
-.container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.calculator {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-}
-
-.result-screen {
-  text-align: right;
-  padding-right: 20px;
-  padding-left: 10px;
-  padding-top: 10px;
-}
-.result {
-  width: 100%;
-  font-family: sans-serif;
-  font-size: 5rem;
-  height: 80px;
-  border: none;
-  text-align: right;
-}
-
-button {
-  height: 90px;
-  border-radius: 5px;
-  border: 1px solid #c4c4c4;
-  background-color: transparent;
-  font-family: sans-serif;
-  font-size: 2rem;
-}
-
-button:hover {
-  background-color: #eaeaea;
-}
-
-.operator {
-  color: #337cac;
-}
-
-.all-clear {
-  background-color: #f0595f;
-  border-color: #b0353a;
-  color: #fff;
-  grid-row: 5/6;
-  grid-column: 1/3;
-}
-
-.all-clear:hover {
-  background-color: #c53a3f;
-}
-
-.equal-sign {
-  background-color: #2e86c0;
-  border-color: #337cac;
-  color: #fff;
-  grid-row: 5/5;
-  grid-column: 3/5;
-}
-
-.equal-sign:hover {
-  background-color: #2173aa;
-}
-
-.keys {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-}
-
-.numbers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-  grid-row: 1/4;
-  grid-column: 1/4;
-}
-
-.operators {
-  display: grid;
-  grid-row: 1/5;
-  grid-column: 4/5;
-}
-
-.zero {
-  grid-column: 1/3;
+  box-sizing: border-box;
+  font-family: "Varela Round", sans-serif;
 }
 
 .credits {
   text-align: center;
   padding-bottom: 20px;
-  font-family: sans-serif;
-  font-size: 1.2rem;
-}
-
-input[type="text"] {
-  border: none;
-  text-align: right;
-}
-
-input[type="text"]:focus {
-  outline: none;
+  font-size: 1rem;
+  font-family: "Kanit", sans-serif !important;
 }
