@@ -18,20 +18,20 @@ function operate(op, n1, n2) {
   let result = 0;
   switch (op) {
     case "+":
-      result = add(n1, n2);
-      break;
+      result = parseFloat(add(n1, n2));
+      return result;
 
     case "-":
-      result = subtract(n1, n2);
-      break;
+      result = parseFloat(subtract(n1, n2));
+      return result;
 
     case "*":
-      result = multiply(n1, n2);
-      break;
+      result = parseFloat(multiply(n1, n2));
+      return result;
 
-    case "/":
-      result = divide(n1, n2);
-      break;
+    case "÷":
+      result = parseFloat(divide(n1, n2));
+      return result;
 
     default:
       return "";
@@ -46,38 +46,87 @@ const equalsButton = document.querySelector("[data-equals]");
 const previousOperand = document.querySelector(".previous-operand");
 const currentOperand = document.querySelector(".current-operand");
 
+let calculated = false;
+
 numButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (
+      (currentOperand.textContent === "" && button.innerText === ".") ||
+      (currentOperand.textContent.includes(".") && button.innerText === ".")
+    ) {
+      return;
+    }
+    if (calculated) {
+      currentOperand.textContent = "";
+    }
     currentOperand.textContent += button.textContent;
+    calculated = false;
   });
 });
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (calculated) {
+      currentOperand.textContent = "";
+    }
     currentOperand.textContent += button.textContent;
+    calculated = false;
   });
 });
 
 allClearButton.addEventListener("click", () => {
   currentOperand.textContent = "";
+  previousOperand.textContent = "";
 });
 
 deleteButton.addEventListener("click", () => {
+  if (calculated) {
+    return;
+  }
   currentOperand.textContent = currentOperand.textContent.slice(0, -1);
 });
 
 equalsButton.addEventListener("click", () => {
-  currentOperand.textContent = operate(
-    currentOperand.textContent,
-    previousOperand.textContent
-  );
-  if (currentOperand.textContent.contains("÷")) {
-    let firstNumber = 0;
-    let secondNumber = 0;
-    let operand = "÷";
+  let firstNumber = 0;
+  let secondNumber = 0;
+  let operand = "";
+  let result = 0;
 
-    [firstNumber, secondNumber] = currentOperand.textContent.split(operand);
-    previousOperand.textContent = currentOperand.textContent;
-    currentOperand.textContent = operate(operand, firstNumber, secondNumber);
+  if (currentOperand.textContent.includes("÷")) {
+    operand = "÷";
+  } else if (currentOperand.textContent.includes("*")) {
+    operand = "*";
+  } else if (currentOperand.textContent.includes("+")) {
+    operand = "+";
+  } else if (currentOperand.textContent.includes("-")) {
+    operand = "-";
   }
+
+  [firstNumber, secondNumber] = currentOperand.textContent.split(operand);
+
+  if (currentOperand.textContent.startsWith(operand)) {
+    result = operate(
+      operand,
+      Number(previousOperand.textContent),
+      Number(secondNumber)
+    );
+    result = +result.toFixed(7);
+    currentOperand.textContent = result;
+    previousOperand.textContent = currentOperand.textContent;
+  } else {
+    result = operate(operand, Number(firstNumber), Number(secondNumber));
+    result = +result.toFixed(7);
+    currentOperand.textContent = result;
+    previousOperand.textContent = currentOperand.textContent;
+  }
+
+  console.log(
+    firstNumber,
+    operand,
+    secondNumber,
+    previousOperand.textContent,
+    currentOperand.textContent,
+    result
+  );
+  calculated = true;
 });
